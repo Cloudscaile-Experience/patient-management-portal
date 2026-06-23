@@ -12,15 +12,17 @@ Never hardcode user-facing strings in JSX. All copy goes through `react-i18next`
 ```json
 // src/locales/myFeature.json
 {
-  "title": "Patient Management",
-  "empty": "No patients found",
-  "actions": {
-    "add": "Add Patient",
-    "edit": "Edit",
-    "delete": "Delete"
-  },
-  "errors": {
-    "load": "Failed to load patients. Please try again."
+  "en": {
+    "title": "Patient Management",
+    "empty": "No patients found",
+    "actions": {
+      "add": "Add Patient",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "errors": {
+      "load": "Failed to load patients. Please try again."
+    }
   }
 }
 ```
