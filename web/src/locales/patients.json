@@ -3,24 +3,56 @@
     "title": "Patient Management",
     "subtitle": "Manage patient records",
     "search": {
-      "placeholder": "Search by name or email"
+      "placeholder": "Search patients by name or email…",
+      "results": "{{count}} result found",
+      "results_other": "{{count}} results found",
+      "total": "{{count}} patient",
+      "total_other": "{{count}} patients"
     },
     "actions": {
       "addPatient": "Add Patient",
       "edit": "Edit",
       "delete": "Delete",
+      "view": "View Patient",
       "save": "Save",
       "cancel": "Cancel",
       "confirm": "Confirm"
     },
+    "detail": {
+      "subtitle": "Patient Record",
+      "back": "Back to patients",
+      "edit": "Edit Patient",
+      "dob": "Date of Birth",
+      "age": "{{count}} yr old",
+      "patientSince": "Patient since",
+      "contact": "Contact Information",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address",
+      "gender": "Gender",
+      "nophone": "No phone on record",
+      "noaddress": "No address on record",
+      "activeMeds": "{{count}} Active Medication",
+      "activeMeds_other": "{{count}} Active Medications",
+      "noMeds": "No Active Medications",
+      "medicationsLabel": "Medications",
+      "vitalsLabel": "Vital Signs",
+      "lastVitals": "Last vitals",
+      "noVitals": "No vitals recorded",
+      "tabs": {
+        "vitals": "Vital Signs",
+        "medications": "Medications"
+      }
+    },
     "table": {
-      "name": "Name",
+      "name": "Patient",
       "dateOfBirth": "Date of Birth",
       "email": "Email",
       "phone": "Phone",
       "gender": "Gender",
       "address": "Address",
       "actions": "Actions",
+      "yearsOld": "yrs",
       "noResults": "No patients found",
       "noResultsHint": "Try adjusting your search or add a new patient."
     },

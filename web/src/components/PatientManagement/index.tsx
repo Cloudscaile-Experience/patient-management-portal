@@ -1,8 +1,19 @@
 import AddIcon from '@mui/icons-material/Add';
+import ClearIcon from '@mui/icons-material/Clear';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import SearchIcon from '@mui/icons-material/Search';
-import { Button, InputAdornment, Stack, TextField } from '@mui/material';
+import {
+  Box,
+  Button,
+  IconButton,
+  InputAdornment,
+  Stack,
+  TextField,
+  Typography
+} from '@mui/material';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router';
 
 import { PageHeader } from '@/components/ui';
 import { useCreatePatient, useDeletePatient, useUpdatePatient } from '@/hooks/usePatientMutations';
@@ -15,10 +26,12 @@ import PatientTable from './PatientTable';
 
 interface PatientManagementProps {
   ns: string;
+  patientDetailBasePath?: string;
 }
 
-const PatientManagement: React.FC<PatientManagementProps> = ({ ns }) => {
+const PatientManagement: React.FC<PatientManagementProps> = ({ ns, patientDetailBasePath }) => {
   const { t } = useTranslation(ns);
+  const navigate = useNavigate();
 
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
@@ -37,17 +50,14 @@ const PatientManagement: React.FC<PatientManagementProps> = ({ ns }) => {
     setEditPatient(null);
     setFormOpen(true);
   };
-
   const handleOpenEdit = (patient: Patient) => {
     setEditPatient(patient);
     setFormOpen(true);
   };
-
   const handleFormClose = () => {
     setFormOpen(false);
     setEditPatient(null);
   };
-
   const handleFormSubmit = async (payload: CreatePatientPayload | UpdatePatientPayload) => {
     if (editPatient) {
       await updateMutation.mutateAsync({
@@ -59,14 +69,19 @@ const PatientManagement: React.FC<PatientManagementProps> = ({ ns }) => {
     }
     handleFormClose();
   };
-
   const handleDeleteConfirm = async (id: string) => {
     await deleteMutation.mutateAsync(id);
     setDeletePatient(null);
   };
+  const handleViewPatient = (patient: Patient) => {
+    if (patientDetailBasePath) {
+      navigate(`${patientDetailBasePath}/${patient.id}`);
+    }
+  };
 
   const isMutating =
     createMutation.isPending || updateMutation.isPending || deleteMutation.isPending;
+  const total = data?.total ?? 0;
 
   return (
     <Stack sx={{ height: '100%' }}>
@@ -81,36 +96,69 @@ const PatientManagement: React.FC<PatientManagementProps> = ({ ns }) => {
       />
 
       <Stack spacing={2} sx={{ p: 3, flex: 1 }}>
-        <TextField
-          size="small"
-          placeholder={t('search.placeholder')}
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-            setPage(1);
-          }}
-          sx={{ maxWidth: 360 }}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon fontSize="small" />
-              </InputAdornment>
-            )
-          }}
-        />
+        {/* Toolbar */}
+        <Stack direction="row" alignItems="center" spacing={2} flexWrap="wrap">
+          <TextField
+            size="small"
+            placeholder={t('search.placeholder')}
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setPage(1);
+            }}
+            sx={{ flex: 1, maxWidth: 480, minWidth: 200 }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon fontSize="small" color="action" />
+                </InputAdornment>
+              ),
+              endAdornment: search ? (
+                <InputAdornment position="end">
+                  <IconButton
+                    size="small"
+                    edge="end"
+                    onClick={() => {
+                      setSearch('');
+                      setPage(1);
+                    }}
+                  >
+                    <ClearIcon sx={{ fontSize: 16 }} />
+                  </IconButton>
+                </InputAdornment>
+              ) : null
+            }}
+          />
 
-        <PatientTable
-          ns={ns}
-          patients={data?.data ?? []}
-          total={data?.total ?? 0}
-          page={page}
-          pageSize={pageSize}
-          loading={isLoading}
-          onPageChange={setPage}
-          onPageSizeChange={setPageSize}
-          onEdit={handleOpenEdit}
-          onDelete={setDeletePatient}
-        />
+          {/* Result count */}
+          {!isLoading && (
+            <Stack direction="row" alignItems="center" spacing={0.75}>
+              <PersonOutlineIcon sx={{ fontSize: 16, color: 'text.disabled' }} />
+              <Typography variant="body2" color="text.secondary">
+                {search
+                  ? t('search.results', { count: total })
+                  : t('search.total', { count: total })}
+              </Typography>
+            </Stack>
+          )}
+        </Stack>
+
+        {/* Table */}
+        <Box sx={{ flex: 1 }}>
+          <PatientTable
+            ns={ns}
+            patients={data?.data ?? []}
+            total={total}
+            page={page}
+            pageSize={pageSize}
+            loading={isLoading}
+            onPageChange={setPage}
+            onPageSizeChange={setPageSize}
+            onView={handleViewPatient}
+            onEdit={handleOpenEdit}
+            onDelete={setDeletePatient}
+          />
+        </Box>
       </Stack>
 
       <PatientForm
@@ -121,7 +169,6 @@ const PatientManagement: React.FC<PatientManagementProps> = ({ ns }) => {
         onSubmit={handleFormSubmit}
         loading={isMutating}
       />
-
       <PatientDeleteDialog
         ns={ns}
         patient={deletePatient}

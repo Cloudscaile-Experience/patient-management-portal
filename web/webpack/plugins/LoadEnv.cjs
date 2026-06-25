@@ -1,9 +1,9 @@
-const webpack = require("webpack");
+const webpack = require('webpack');
 
 class LoadEnv {
   constructor(envVars = []) {
     this.envVars = envVars;
-    this.pluginName = "LoadEnv";
+    this.pluginName = 'LoadEnv';
   }
 
   apply(compiler) {
@@ -12,9 +12,7 @@ class LoadEnv {
     // Build the configuration object for DefinePlugin
     for (const envVar of this.envVars) {
       if (process.env[envVar] !== undefined) {
-        definePluginConfig[`process.env.${envVar}`] = JSON.stringify(
-          process.env[envVar],
-        );
+        definePluginConfig[`process.env.${envVar}`] = JSON.stringify(process.env[envVar]);
       }
     }
 

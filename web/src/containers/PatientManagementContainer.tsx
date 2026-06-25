@@ -14,12 +14,18 @@ const queryClient = new QueryClient({
 const ns = extensionManager.getNsForTranslation('patients');
 extensionManager.registerTranslation(ns, patientsTranslations);
 
-const PatientManagementContainer: React.FC = () => (
+interface PatientManagementContainerProps {
+  patientDetailBasePath?: string;
+}
+
+const PatientManagementContainer: React.FC<PatientManagementContainerProps> = ({
+  patientDetailBasePath
+}) => (
   <ThemeProvider theme={extensionManager.getTheme()}>
     <QueryClientProvider client={queryClient}>
       <ErrorBoundary>
         <Suspense fallback={<LoadingSpinner fullHeight label="Loading..." />}>
-          <PatientManagement ns={ns} />
+          <PatientManagement ns={ns} patientDetailBasePath={patientDetailBasePath} />
         </Suspense>
       </ErrorBoundary>
     </QueryClientProvider>
