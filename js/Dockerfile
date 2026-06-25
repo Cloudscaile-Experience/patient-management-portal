@@ -3,7 +3,7 @@ FROM node:22-alpine AS builder
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm ci
+RUN npm ci --ignore-scripts
 
 COPY tsconfig*.json ./
 COPY src/ ./src/
@@ -17,7 +17,7 @@ RUN addgroup --system --gid 1001 nodejs \
     && adduser --system --uid 1001 fastify
 
 COPY package*.json ./
-RUN npm ci --omit=dev && npm cache clean --force
+RUN npm ci --omit=dev --ignore-scripts && npm cache clean --force
 
 COPY --from=builder --chown=fastify:nodejs /app/dist ./dist
 COPY --chown=fastify:nodejs drizzle/ ./drizzle/

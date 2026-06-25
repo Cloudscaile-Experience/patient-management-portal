@@ -5,7 +5,7 @@ services:
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-patient_portal}
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
@@ -35,10 +35,8 @@ services:
       PG_HOST: db
       PG_PORT: 5432
       PG_USERNAME: ${POSTGRES_USER:-postgres}
-      PG_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+      PG_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
       PG_DATABASE: ${POSTGRES_DB:-patient_portal}
-      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET is required}
-      JWT_EXPIRY: ${JWT_EXPIRY:-7d}
     depends_on:
       db:
         condition: service_healthy

@@ -10,7 +10,8 @@ pre-commit:
     - name: js — biome lint + format
       root: "js/"
       glob: "*.{ts,tsx,js,jsx,json}"
-      run: npx @biomejs/biome check --write {staged_files}
+      exclude: "drizzle/**"
+      run: sh -c 'staged="{staged_files}"; [ -z "$staged" ] && exit 0; npx @biomejs/biome check --write $staged'
       stage_fixed: true
 
     - name: js — typescript
@@ -21,7 +22,7 @@ pre-commit:
     - name: web — biome lint + format
       root: "web/"
       glob: "*.{ts,tsx,js,jsx,json}"
-      run: npx @biomejs/biome check --write {staged_files}
+      run: sh -c 'staged="{staged_files}"; [ -z "$staged" ] && exit 0; npx @biomejs/biome check --write $staged'
       stage_fixed: true
 
     - name: web — typescript
