@@ -1,8 +1,11 @@
 import authPlugin from "@/hooks/auth.js";
+import medicationsRoutes from "@/modules/medications/medications.routes.js";
 import patientsRoutes from "@/modules/patients/patients.routes.js";
+import vitalSignsRoutes from "@/modules/vital-signs/vital-signs.routes.js";
 import dbPlugin from "@/plugins/db.js";
 import envPlugin from "@/plugins/env.js";
 import swaggerPlugin from "@/plugins/swagger.js";
+import cors from "@fastify/cors";
 import helmet from "@fastify/helmet";
 import rateLimit from "@fastify/rate-limit";
 import sensible from "@fastify/sensible";
@@ -26,6 +29,11 @@ export async function buildApp(): Promise<FastifyInstance> {
 	await fastify.register(envPlugin);
 
 	// 2. Security plugins
+	// CORS is only needed locally — the API gateway injects CORS headers in all other environments.
+	if (process.env.NODE_ENV !== "production") {
+		await fastify.register(cors, { origin: true, credentials: true });
+	}
+
 	// CSP is disabled globally — this is a backend API with no user-rendered HTML.
 	// @fastify/swagger-ui's staticCSP option manages CSP for the /open/docs route on its own.
 	await fastify.register(helmet, { contentSecurityPolicy: false });
@@ -81,6 +89,8 @@ export async function buildApp(): Promise<FastifyInstance> {
 
 	// Feature modules
 	await fastify.register(patientsRoutes, { prefix: "/v1/patients" });
+	await fastify.register(vitalSignsRoutes, { prefix: "/v1/patients/:patientId/vitals" });
+	await fastify.register(medicationsRoutes, { prefix: "/v1/patients/:patientId/medications" });
 
 	return fastify;
 }

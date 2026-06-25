@@ -22,9 +22,7 @@ class ErrorBoundary extends Component<Props, State> {
     return { hasError: true, error };
   }
 
-  componentDidCatch(error: Error, info: ErrorInfo): void {
-    console.error('[ErrorBoundary]', error, info.componentStack);
-  }
+  componentDidCatch(_error: Error, _info: ErrorInfo): void {}
 
   handleReset = (): void => {
     this.setState({ hasError: false, error: null });
