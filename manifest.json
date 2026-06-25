@@ -2,7 +2,7 @@
   "version": "0.0.1",
   "tenant": "cloudscaile",
   "extensionName": "patientManagementPortal",
-  "description": "A system for clinics to manage patient records, appointments, and medical history. Backend exposes REST endpoints for patient CRUD, appointment scheduling, and prescription tracking. Database stores patients, appointments, providers, prescriptions, and visit notes with relational links. React frontend offers a dashboard with patient search, an appointment calendar view, and a per-patient timeline of visits and medications.",
+  "description": "A system for clinics to manage patient records, vitals, and medical history. It provides a user-friendly interface for healthcare professionals to access and update patient information efficiently.",
   "displayName": "Patient management portal",
   "web": {
     "scope": "remote",
