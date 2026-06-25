@@ -5,6 +5,8 @@ import fp from "fastify-plugin";
 
 export const EnvSchema = Type.Object({
 	NODE_ENV: Type.String({ default: "development" }),
+	TENANT_NAME: Type.String({ default: "cloudscaile" }),
+	EXTENSION_NAME: Type.String({ default: "patientManagementPortal" }),
 	PORT: Type.Integer({ default: 3000 }),
 	HOST: Type.String({ default: "0.0.0.0" }),
 	PG_HOST: Type.String({ default: "localhost" }),
