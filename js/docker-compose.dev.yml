@@ -3,7 +3,7 @@
 #
 # Usage:
 #   docker compose -f docker-compose.dev.yml up -d
-#   cp .env.example .env  # fill in values; DATABASE_URL points to localhost:5432
+#   cp .env.example .env  # fill in values; PG_HOST=localhost PG_PORT=5432
 #   npm run dev
 
 services:

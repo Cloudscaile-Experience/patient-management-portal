@@ -5,7 +5,13 @@ import fp from "fastify-plugin";
 import { Pool } from "pg";
 
 const dbPlugin: FastifyPluginAsync = async (fastify) => {
-	const pool = new Pool({ connectionString: fastify.config.DATABASE_URL });
+	const pool = new Pool({
+		host: fastify.config.PG_HOST,
+		port: fastify.config.PG_PORT,
+		user: fastify.config.PG_USERNAME,
+		password: fastify.config.PG_PASSWORD,
+		database: fastify.config.PG_DATABASE,
+	});
 
 	const client = await pool.connect().catch((err: Error) => {
 		throw new Error(`Database connection failed: ${err.message}`);

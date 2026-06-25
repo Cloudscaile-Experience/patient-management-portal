@@ -7,7 +7,11 @@ export const EnvSchema = Type.Object({
 	NODE_ENV: Type.String({ default: "development" }),
 	PORT: Type.Integer({ default: 3000 }),
 	HOST: Type.String({ default: "0.0.0.0" }),
-	DATABASE_URL: Type.String(),
+	PG_HOST: Type.String({ default: "localhost" }),
+	PG_PORT: Type.Integer({ default: 5432 }),
+	PG_USERNAME: Type.String(),
+	PG_PASSWORD: Type.String(),
+	PG_DATABASE: Type.String(),
 	GATEWAY_BASE_URL: Type.Optional(Type.String()),
 });
 

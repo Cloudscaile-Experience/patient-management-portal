@@ -7,7 +7,11 @@ export default defineConfig({
 		environment: "node",
 		env: {
 			NODE_ENV: "test",
-			DATABASE_URL: "postgresql://test:test@localhost:5432/test_db",
+			PG_HOST: "localhost",
+			PG_PORT: "5432",
+			PG_USERNAME: "test",
+			PG_PASSWORD: "test",
+			PG_DATABASE: "test_db",
 		},
 		coverage: {
 			provider: "v8",
