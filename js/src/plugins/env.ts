@@ -8,7 +8,6 @@ export const EnvSchema = Type.Object({
 	PORT: Type.Integer({ default: 3000 }),
 	HOST: Type.String({ default: "0.0.0.0" }),
 	DATABASE_URL: Type.String(),
-	CORS_ORIGINS: Type.String({ default: "http://localhost:3000" }),
 	GATEWAY_BASE_URL: Type.Optional(Type.String()),
 });
 

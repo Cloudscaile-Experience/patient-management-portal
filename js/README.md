@@ -74,7 +74,6 @@ cp .env.example .env
 | `PORT` | | `3000` | Port the server listens on |
 | `HOST` | | `0.0.0.0` | Bind address |
 | `DATABASE_URL` | Yes | — | PostgreSQL connection string |
-| `CORS_ORIGINS` | | `http://localhost:3000` | Comma-separated allowed origins |
 | `GATEWAY_BASE_URL` | | — | Optional — adds a server entry in Swagger UI |
 
 ---
@@ -172,6 +171,6 @@ patients
 
 ## Architecture notes
 
-- **Plugin registration order**: `env` → security (`helmet`, `cors`, `rate-limit`) → `db` → `swagger` → `auth` → feature routes. Each plugin depends on the ones before it.
+- **Plugin registration order**: `env` → security (`helmet`, `rate-limit`) → `db` → `swagger` → `auth` → feature routes. Each plugin depends on the ones before it. CORS is handled by the API gateway upstream.
 - **Auth is decode-only**: The `authenticate` decorator decodes the JWT from the gateway; it does not verify the signature (the gateway already did).
 - **Error handling**: A global error handler normalises all errors. 5xx responses return a generic message to avoid leaking internals.

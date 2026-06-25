@@ -6,6 +6,13 @@ import { Pool } from "pg";
 
 const dbPlugin: FastifyPluginAsync = async (fastify) => {
 	const pool = new Pool({ connectionString: fastify.config.DATABASE_URL });
+
+	const client = await pool.connect().catch((err: Error) => {
+		throw new Error(`Database connection failed: ${err.message}`);
+	});
+	client.release();
+	fastify.log.info("Database connection established.");
+
 	const db = drizzle(pool, { schema });
 
 	fastify.decorate("db", db);

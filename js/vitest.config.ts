@@ -8,7 +8,6 @@ export default defineConfig({
 		env: {
 			NODE_ENV: "test",
 			DATABASE_URL: "postgresql://test:test@localhost:5432/test_db",
-			CORS_ORIGINS: "http://localhost:3000",
 		},
 		coverage: {
 			provider: "v8",

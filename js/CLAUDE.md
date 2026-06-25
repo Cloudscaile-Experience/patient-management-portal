@@ -16,7 +16,6 @@ TypeScript REST API built with Fastify, Drizzle ORM, and Biome. Follows a module
 | **@fastify/swagger + @fastify/swagger-ui** | OpenAPI 3.0 docs served at `/docs`                         |
 | **@fastify/jwt**                           | JWT authentication                                         |
 | **@fastify/helmet**                        | Security headers                                           |
-| **@fastify/cors**                          | CORS handling                                              |
 | **@fastify/rate-limit**                    | Rate limiting                                              |
 | **Pino**                                   | Structured logging (built into Fastify)                    |
 
@@ -189,7 +188,6 @@ Biome is the single tool for linting and formatting. It replaces ESLint and Pret
 
 ### Security
 
-- CORS: allow only trusted origins from environment config.
 - Helmet: enabled for all routes by default.
 - Rate limiting: applied globally and tightened on auth endpoints.
 - JWT: validate using `fastify.authenticate` hook on protected routes via `onRequest`.

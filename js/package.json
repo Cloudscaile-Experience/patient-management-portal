@@ -4,7 +4,7 @@
 	"type": "module",
 	"main": "dist/server.js",
 	"scripts": {
-		"dev": "tsx watch src/server.ts",
+		"dev": "tsx --watch --watch-path=./src src/server.ts",
 		"build": "tsc --project tsconfig.build.json && tsc-alias -p tsconfig.build.json",
 		"start": "node dist/server.js",
 		"check": "biome check .",
@@ -19,7 +19,6 @@
 		"prepare": "lefthook install"
 	},
 	"dependencies": {
-		"@fastify/cors": "^11.0.0",
 		"@fastify/env": "^7.0.0",
 		"@fastify/helmet": "^12.0.0",
 		"@fastify/rate-limit": "^10.2.2",

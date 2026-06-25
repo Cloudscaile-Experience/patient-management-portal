@@ -16,13 +16,10 @@ type OpenApiDocument = {
 
 const HTTP_METHODS = ["get", "post", "put", "patch", "delete", "options", "head"] as const;
 
-function buildServers(
-	port: number,
-	gatewayBaseUrl?: string,
-): Array<{ url: string; description: string }> {
+function buildServers(gatewayBaseUrl?: string): Array<{ url: string; description: string }> {
 	const servers: Array<{ url: string; description: string }> = [
 		{
-			url: `http://localhost:${port}`,
+			url: "/",
 			description: "Local Development Server",
 		},
 	];
@@ -50,7 +47,7 @@ const swaggerPlugin: FastifyPluginAsync = async (fastify) => {
 					email: "devops@cloudscaile.com",
 				},
 			},
-			servers: buildServers(fastify.config.PORT, fastify.config.GATEWAY_BASE_URL),
+			servers: buildServers(fastify.config.GATEWAY_BASE_URL),
 			components: {
 				securitySchemes: {
 					Bearer: {
@@ -110,7 +107,7 @@ const swaggerPlugin: FastifyPluginAsync = async (fastify) => {
 			deepLinking: true,
 			displayRequestDuration: true,
 		},
-		staticCSP: true,
+		staticCSP: false,
 	});
 };
 

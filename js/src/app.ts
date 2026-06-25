@@ -3,7 +3,6 @@ import patientsRoutes from "@/modules/patients/patients.routes.js";
 import dbPlugin from "@/plugins/db.js";
 import envPlugin from "@/plugins/env.js";
 import swaggerPlugin from "@/plugins/swagger.js";
-import cors from "@fastify/cors";
 import helmet from "@fastify/helmet";
 import rateLimit from "@fastify/rate-limit";
 import sensible from "@fastify/sensible";
@@ -27,11 +26,9 @@ export async function buildApp(): Promise<FastifyInstance> {
 	await fastify.register(envPlugin);
 
 	// 2. Security plugins
-	await fastify.register(helmet);
-	await fastify.register(cors, {
-		origin: fastify.config.CORS_ORIGINS.split(","),
-		credentials: true,
-	});
+	// CSP is disabled globally — this is a backend API with no user-rendered HTML.
+	// @fastify/swagger-ui's staticCSP option manages CSP for the /open/docs route on its own.
+	await fastify.register(helmet, { contentSecurityPolicy: false });
 	await fastify.register(rateLimit, {
 		max: 100,
 		timeWindow: "1 minute",
