@@ -13,12 +13,6 @@ const dbPlugin: FastifyPluginAsync = async (fastify) => {
 		database: fastify.config.PG_DATABASE,
 	});
 
-	const client = await pool.connect().catch((err: Error) => {
-		throw new Error(`Database connection failed: ${err.message}`);
-	});
-	client.release();
-	fastify.log.info("Database connection established.");
-
 	const db = drizzle(pool, { schema });
 
 	fastify.decorate("db", db);
