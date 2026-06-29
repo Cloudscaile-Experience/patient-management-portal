@@ -16,7 +16,7 @@ interface ListMedicationsParams {
 
 class MedicationsApi {
   private get axios() {
-    return extensionManager.getExtAxios({ local: true });
+    return extensionManager.getExtAxios();
   }
 
   async list(

@@ -16,7 +16,7 @@ interface ListVitalsParams {
 
 class VitalsApi {
   private get axios() {
-    return extensionManager.getExtAxios({ local: true });
+    return extensionManager.getExtAxios();
   }
 
   async list(patientId: string, params: ListVitalsParams = {}): Promise<VitalSignListResponse> {

@@ -15,7 +15,7 @@ interface ListPatientsParams {
 
 class PatientsApi {
   private get axios() {
-    return extensionManager.getExtAxios({ local: true });
+    return extensionManager.getExtAxios();
   }
 
   async list(params: ListPatientsParams = {}): Promise<PatientListResponse> {
