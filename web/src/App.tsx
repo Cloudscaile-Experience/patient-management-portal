@@ -1,3 +1,4 @@
+import { ErrorBoundary } from '@/components/ui';
 import { extensionManager } from '@/utils/extension';
 import { ThemeProvider } from '@mui/material';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -12,7 +13,9 @@ interface AppProps {
 
 const App: React.FC<AppProps> = ({ children }) => (
   <ThemeProvider theme={extensionManager.getTheme()}>
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <ErrorBoundary>{children}</ErrorBoundary>
+    </QueryClientProvider>
   </ThemeProvider>
 );
 

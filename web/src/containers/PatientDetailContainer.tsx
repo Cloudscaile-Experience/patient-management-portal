@@ -1,11 +1,10 @@
-import { ThemeProvider } from '@mui/material';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Suspense, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 
+import App from '@/App';
 import PatientDetail from '@/components/PatientDetail';
 import PatientForm from '@/components/PatientManagement/PatientForm';
-import { ErrorBoundary, LoadingSpinner } from '@/components/ui';
+import { LoadingSpinner } from '@/components/ui';
 import { useUpdatePatient } from '@/hooks/usePatientMutations';
 import { usePatient } from '@/hooks/usePatients';
 import medicationsTranslations from '@/locales/medications.json';
@@ -13,10 +12,6 @@ import patientsTranslations from '@/locales/patients.json';
 import vitalsTranslations from '@/locales/vitals.json';
 import type { UpdatePatientPayload } from '@/types/patient';
 import { extensionManager } from '@/utils/extension';
-
-const queryClient = new QueryClient({
-  defaultOptions: { queries: { refetchOnWindowFocus: false, retry: 3 } }
-});
 
 const patientsNs = extensionManager.getNsForTranslation('patients');
 const vitalsNs = extensionManager.getNsForTranslation('vitals');
@@ -82,15 +77,11 @@ const PatientDetailContainer: React.FC<PatientDetailContainerProps> = ({
   const resolvedPatientId = patientIdProp ?? params.patientId ?? '';
 
   return (
-    <ThemeProvider theme={extensionManager.getTheme()}>
-      <QueryClientProvider client={queryClient}>
-        <ErrorBoundary>
-          <Suspense fallback={<LoadingSpinner fullHeight label="Loading..." />}>
-            <PatientDetailInner patientId={resolvedPatientId} backRoute={backRoute} />
-          </Suspense>
-        </ErrorBoundary>
-      </QueryClientProvider>
-    </ThemeProvider>
+    <App>
+      <Suspense fallback={<LoadingSpinner fullHeight label="Loading..." />}>
+        <PatientDetailInner patientId={resolvedPatientId} backRoute={backRoute} />
+      </Suspense>
+    </App>
   );
 };
 
