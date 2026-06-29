@@ -7,14 +7,14 @@ const pgHost = process.env.PG_HOST;
 const pgPort = process.env.PG_PORT;
 const pgUsername = process.env.PG_USERNAME;
 const pgPassword = process.env.PG_PASSWORD;
-const pgDatabase = process.env.PG_DATABASE;
+const pgDatabase = process.env.PG_DB;
 
 for (const [key, val] of Object.entries({
 	PG_HOST: pgHost,
 	PG_PORT: pgPort,
 	PG_USERNAME: pgUsername,
 	PG_PASSWORD: pgPassword,
-	PG_DATABASE: pgDatabase,
+	PG_DB: pgDatabase,
 })) {
 	if (!val) {
 		throw new Error(`Missing required environment variable: ${key}`);

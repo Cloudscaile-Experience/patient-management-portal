@@ -10,7 +10,7 @@ const dbPlugin: FastifyPluginAsync = async (fastify) => {
 		port: fastify.config.PG_PORT,
 		user: fastify.config.PG_USERNAME,
 		password: fastify.config.PG_PASSWORD,
-		database: fastify.config.PG_DATABASE,
+		database: fastify.config.PG_DB,
 	});
 
 	const db = drizzle(pool, { schema });

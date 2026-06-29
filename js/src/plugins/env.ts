@@ -13,7 +13,7 @@ export const EnvSchema = Type.Object({
 	PG_PORT: Type.Integer({ default: 5432 }),
 	PG_USERNAME: Type.String(),
 	PG_PASSWORD: Type.String(),
-	PG_DATABASE: Type.String(),
+	PG_DB: Type.String(),
 	GATEWAY_BASE_URL: Type.Optional(Type.String()),
 });
 

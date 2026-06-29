@@ -39,7 +39,7 @@ npm run db:studio
 
 ## Notes
 
-- Ensure `PG_HOST`, `PG_PORT`, `PG_USERNAME`, `PG_PASSWORD`, and `PG_DATABASE` are set in `.env` before running any DB commands.
+- Ensure `PG_HOST`, `PG_PORT`, `PG_USERNAME`, `PG_PASSWORD`, and `PG_DB` are set in `.env` before running any DB commands.
 - Never edit generated files in `drizzle/migrations/` manually.
 - Schema changes must be exported through `src/db/schema/index.ts` to be picked up by Drizzle Kit.
 - Use `db:push` in development only — always use generate → migrate for staging/production.

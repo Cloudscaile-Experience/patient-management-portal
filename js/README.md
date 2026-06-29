@@ -77,7 +77,7 @@ cp .env.example .env
 | `PG_PORT` | | `5432` | PostgreSQL port |
 | `PG_USERNAME` | Yes | — | PostgreSQL username |
 | `PG_PASSWORD` | Yes | — | PostgreSQL password |
-| `PG_DATABASE` | Yes | — | PostgreSQL database name |
+| `PG_DB` | Yes | — | PostgreSQL database name |
 | `GATEWAY_BASE_URL` | | — | Optional — adds a server entry in Swagger UI |
 
 ---

@@ -26,6 +26,6 @@ TypeScript is compiled on-the-fly — no build step needed. The server restarts 
 ## Prerequisites
 
 - Copy `.env.example` to `.env` and fill in the values.
-- `PG_HOST`, `PG_PORT`, `PG_USERNAME`, `PG_PASSWORD`, and `PG_DATABASE` must be set to point to a running PostgreSQL instance.
+- `PG_HOST`, `PG_PORT`, `PG_USERNAME`, `PG_PASSWORD`, and `PG_DB` must be set to point to a running PostgreSQL instance.
 - `JWT_SECRET` must be set (any non-empty string in development).
 - Use `NODE_ENV=development` to enable `pino-pretty` log formatting.

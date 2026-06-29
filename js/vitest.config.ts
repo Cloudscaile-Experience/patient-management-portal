@@ -11,7 +11,7 @@ export default defineConfig({
 			PG_PORT: "5432",
 			PG_USERNAME: "test",
 			PG_PASSWORD: "test",
-			PG_DATABASE: "test_db",
+			PG_DB: "test_db",
 		},
 		coverage: {
 			provider: "v8",
