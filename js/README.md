@@ -71,7 +71,7 @@ cp .env.example .env
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
 | `NODE_ENV` | | `development` | `development` or `production` |
-| `PORT` | | `3000` | Port the server listens on |
+| `PORT` | | `8000` | Port the server listens on |
 | `HOST` | | `0.0.0.0` | Bind address |
 | `PG_HOST` | | `localhost` | PostgreSQL host |
 | `PG_PORT` | | `5432` | PostgreSQL port |
@@ -100,8 +100,8 @@ npm run db:migrate
 npm run dev
 ```
 
-The API is available at `http://localhost:3000`.  
-Swagger UI is at `http://localhost:3000/docs`.
+The API is available at `http://localhost:8000`.  
+Swagger UI is at `http://localhost:8000/open/docs`.
 
 ### Production (Docker)
 

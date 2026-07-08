@@ -29,7 +29,7 @@ cp .env.example .env          # fill in DATABASE_URL and other values
 docker compose -f docker-compose.dev.yml up -d   # start PostgreSQL
 npm install
 npm run db:migrate             # run schema migrations
-npm run dev                    # http://localhost:3000
+npm run dev                    # http://localhost:8000
 ```
 
 ### Frontend (micro-frontend)

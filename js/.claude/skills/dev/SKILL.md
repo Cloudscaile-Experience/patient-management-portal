@@ -17,11 +17,11 @@ TypeScript is compiled on-the-fly — no build step needed. The server restarts 
 
 | Resource       | URL                                   |
 | -------------- | ------------------------------------- |
-| API Base       | `http://localhost:3000/v1`            |
-| Health Check   | `http://localhost:3000/open/health`   |
-| Swagger UI     | `http://localhost:3000/open/docs`     |
-| Swagger JSON   | `http://localhost:3000/open/docs/json`|
-| Swagger YAML   | `http://localhost:3000/open/docs/yaml`|
+| API Base       | `http://localhost:8000/v1`            |
+| Health Check   | `http://localhost:8000/open/health`   |
+| Swagger UI     | `http://localhost:8000/open/docs`     |
+| Swagger JSON   | `http://localhost:8000/open/docs/json`|
+| Swagger YAML   | `http://localhost:8000/open/docs/yaml`|
 
 ## Prerequisites
 

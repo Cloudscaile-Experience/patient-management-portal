@@ -26,6 +26,6 @@ RUN chmod +x entrypoint.sh
 
 USER fastify
 
-EXPOSE 3000
+EXPOSE 8000
 
 ENTRYPOINT ["./entrypoint.sh"]
