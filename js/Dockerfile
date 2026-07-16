@@ -22,7 +22,8 @@ RUN npm ci --omit=dev --ignore-scripts && npm cache clean --force
 COPY --from=builder --chown=fastify:nodejs /app/dist ./dist
 COPY --chown=fastify:nodejs drizzle/ ./drizzle/
 COPY --chown=fastify:nodejs entrypoint.sh ./entrypoint.sh
-RUN chmod +x entrypoint.sh
+COPY --chown=fastify:nodejs scripts/ ./scripts/
+RUN chmod +x entrypoint.sh scripts/*.sh
 
 USER fastify
 
